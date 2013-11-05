@@ -4,5 +4,7 @@ php:
   - 5.3
   - 5.4
 before_script:
+  - mysql -e 'CREATE DATABASE `dbviz_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;'
+  - cp tests/config/dbviz.ini.travis tests/config/dbviz.ini
   - make
 

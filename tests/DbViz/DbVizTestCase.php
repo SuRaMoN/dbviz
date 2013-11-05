@@ -3,6 +3,7 @@
 namespace DbViz;
 
 use DbViz\DbVizContainer;
+use DbViz\Entity\ConnectionCredentials;
 use DbViz\Ui\DbVizConsole;
 use PDO;
 use PHPUnit_Framework_TestCase;
@@ -13,6 +14,15 @@ use Symfony\Component\Console\Output\StreamOutput;
 abstract class DbVizTestCase extends PHPUnit_Framework_TestCase
 {
 	protected $temporaryFiles = array();
+
+	protected function getConfig()
+	{
+		$configPath = __DIR__ . '/../config/dbviz.ini';
+		if(! file_exists($configPath)) {
+			return array();
+		}
+	    return parse_ini_file($configPath, true);
+	}
 
 	protected function createContainer()
 	{
@@ -43,6 +53,53 @@ abstract class DbVizTestCase extends PHPUnit_Framework_TestCase
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$pdo->exec(file_get_contents($sqlFilePath));
 		return $tmpFile;
+	}
+
+	protected function skipIfNoMysql()
+	{
+		$config = $this->getConfig();
+		if(! array_key_exists('MySQL', $config)) {
+			$this->markTestSkipped();
+		}
+	}
+	
+
+	protected function getMysqlCredentials()
+	{
+		$config = $this->getConfig();
+		$myConfig = $config['MySQL'];
+		return new ConnectionCredentials("mysql:host={$myConfig['host']};dbname={$myConfig['database']}", $myConfig['username'], $myConfig['password']);
+	}
+	
+
+	protected function getMysqlPDO()
+	{
+		$credentials = $this->getMysqlCredentials();
+		$pdo = new PDO($credentials->getDsn(), $credentials->getUsername(), $credentials->getPassword());
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		return $pdo;
+	}
+
+	protected function dropAllMysqlDatabaseTables(PDO $pdo)
+	{
+		$pdo->exec('SET foreign_key_checks = 0');
+		foreach($pdo->query('show tables')->fetchAll(PDO::FETCH_COLUMN) as $table) {
+			$pdo->exec("drop table `$table`");
+		}
+		$pdo->exec('SET foreign_key_checks = 1');
+	}
+	
+
+	protected function createMysqlDbFromSqlFile($sqlFilePath)
+	{
+		$pdo = $this->getMysqlPDO();
+		$this->dropAllMysqlDatabaseTables($pdo);
+		foreach(explode(';', file_get_contents($sqlFilePath)) as $query) {
+			if(trim($query) != '') {
+				$pdo->exec($query);
+			}
+		}
+		return $pdo;
 	}
 
 	public function createTemporaryFile()

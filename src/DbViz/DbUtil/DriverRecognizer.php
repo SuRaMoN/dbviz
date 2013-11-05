@@ -4,7 +4,7 @@ namespace DbViz\DbUtil;
 
 use DbViz\Constant\DbDrivers;
 use DbViz\Entity\ConnectionCredentials;
-use Exception;
+use DbViz\Exception\UnknownDriverException;
 use PDO;
 use PDOException;
 
@@ -26,7 +26,7 @@ class DriverRecognizer
 				return DbDrivers::SQLITE;
 
 			default:
-				throw new Exception("Could not recognize driver from dsn: $dsn");
+				throw new UnknownDriverException("Could not recognize driver from dsn: $dsn");
 		}
 	}
 
@@ -42,7 +42,7 @@ class DriverRecognizer
 			return $driver;
 		}
 
-		throw new Exception('Could not retrieve odbc driver');
+		throw new UnknownDriverException('Could not retrieve odbc driver');
 	}
 
 	protected function getOdbcDriverNameFromDsn(ConnectionCredentials $connectionCredentials)

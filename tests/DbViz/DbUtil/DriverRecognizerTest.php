@@ -10,6 +10,15 @@ use DbViz\DbUtil\DriverRecognizer;
 
 class DriverRecognizerTest extends DbVizTestCase
 {
+	/**
+	 * @test
+	 * @expectedException \DbViz\Exception\UnknownDriverException
+	 */
+	public function testUnknownDriverThrowException()
+	{
+		$this->assertDriverIs(0, 'bliablabloe');
+	}
+
 	/** @test */
 	public function testSqliteRecognition()
 	{

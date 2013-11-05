@@ -63,14 +63,12 @@ abstract class DbVizTestCase extends PHPUnit_Framework_TestCase
 		}
 	}
 	
-
 	protected function getMysqlCredentials()
 	{
 		$config = $this->getConfig();
 		$myConfig = $config['MySQL'];
 		return new ConnectionCredentials("mysql:host={$myConfig['host']};dbname={$myConfig['database']}", $myConfig['username'], $myConfig['password']);
 	}
-	
 
 	protected function getMysqlPDO()
 	{

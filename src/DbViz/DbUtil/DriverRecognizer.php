@@ -19,6 +19,9 @@ class DriverRecognizer
 	{
 		$dsn = $connectionCredentials->getDsn();
 		switch(strtolower(preg_replace('/^([^:]*):.*/', '\1', $dsn))) {
+			case 'mysql':
+				return DbDrivers::MYSQL;
+
 			case 'odbc':
 				return $this->getOdbcDriverName($connectionCredentials);
 

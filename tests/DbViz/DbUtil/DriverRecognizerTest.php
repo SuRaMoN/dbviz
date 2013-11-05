@@ -20,6 +20,12 @@ class DriverRecognizerTest extends DbVizTestCase
 	}
 
 	/** @test */
+	public function testMysqlRecognition()
+	{
+		$this->assertDriverIs(DbDrivers::MYSQL, 'mysql:bliablabloe');
+	}
+
+	/** @test */
 	public function testSqliteRecognition()
 	{
 		$this->assertDriverIs(DbDrivers::SQLITE, 'sqlite:bliablabloe');

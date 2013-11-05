@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+use DbViz\DbVizContainer;
+use DbViz\Ui\DbVizConsole;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Debug\ErrorHandler;
+
+require(__DIR__ . '/../vendor/autoload.php');
+
+ErrorHandler::register();
+DbVizConsole::newInstance(new DbVizContainer())->guiAwareRun(new ArgvInput());
+

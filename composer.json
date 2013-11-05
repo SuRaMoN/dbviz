@@ -1,0 +1,20 @@
+{
+	"autoload": {
+		"psr-0": {
+			"DbViz\\": ["src/", "tests/"]
+		}
+	},
+    "authors": [
+        {
+            "name": "SuRaMoN",
+            "email": "noemail@suramon.be"
+        }
+    ],
+    "description": "Database visualization",
+    "name": "SuRaMoN/db-viz",
+    "require": {
+        "symfony/console": "2.3",
+        "symfony/debug": "2.3",
+		"pimple/pimple": "v1.0"
+    }
+}

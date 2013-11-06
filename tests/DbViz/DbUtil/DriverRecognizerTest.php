@@ -31,6 +31,18 @@ class DriverRecognizerTest extends DbVizTestCase
 		$this->assertDriverIs(DbDrivers::SQLITE, 'sqlite:bliablabloe');
 	}
 
+	/** @test */
+	public function testUnixSqliteOdbcRecognition()
+	{
+		$this->assertDriverIs(DbDrivers::SQLITE, 'odbc:DRIVER=Sqlite3;Database=bliblabloe');
+	}
+
+	/** @test */
+	public function testWindowsSqliteOdbcRecognition()
+	{
+		$this->assertDriverIs(DbDrivers::SQLITE, 'odbc:DSN=SQLite3 Datasource;Database=full-path-to-db');
+	}
+
 	protected function assertDriverIs($expectedDriver, $dsn)
 	{
 		$driverRecognizer = new DriverRecognizer();

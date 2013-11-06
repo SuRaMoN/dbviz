@@ -55,11 +55,18 @@ abstract class DbVizTestCase extends PHPUnit_Framework_TestCase
 		return $tmpFile;
 	}
 
+	protected function skipIfNoOdbcDriver()
+	{
+		if(! in_array('odbc', PDO::getAvailableDrivers())) {
+			$this->markTestSkipped('Skipped because no odbc driver installed');
+		}
+	}
+	
 	protected function skipIfNoMysql()
 	{
 		$config = $this->getConfig();
 		if(! array_key_exists('MySQL', $config)) {
-			$this->markTestSkipped();
+			$this->markTestSkipped('Skipped because no MySQL instance configured');
 		}
 	}
 	

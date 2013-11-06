@@ -50,12 +50,13 @@ class DriverRecognizer
 
 	protected function getOdbcDriverNameFromDsn(ConnectionCredentials $connectionCredentials)
 	{
-		$dsn = substr($connectionCredentials->getDsn(), 0, 5); // dsn should start with "odbc:"
-		$resultCount = preg_match('/driver\s*=([^;]*)/i', $dsn, $driverMatch);
+		$dsn = substr($connectionCredentials->getDsn(), 5); // dsn should start with "odbc:"
+		$resultCount = preg_match('/(?:driver|dsn)\s*=([^;]*)/i', $dsn, $driverMatch);
 		if(0 === $resultCount) {
 			return null;
 		}
 		switch(strtolower(trim($driverMatch[1]))) {
+			case 'sqlite3 datasource':
 			case 'sqlite3':
 				return DbDrivers::SQLITE;
 

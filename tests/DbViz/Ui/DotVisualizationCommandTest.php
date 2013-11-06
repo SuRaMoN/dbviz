@@ -28,8 +28,23 @@ class DotVisualizationCommandTest extends DbVizTestCase
 	}
 
 	/** @test */
+	public function testOdbcSqliteVisualization()
+	{
+		$this->skipIfNoOdbcDriver();
+
+		$dotFilePath = $this->createTemporaryFile();
+		$dbFilePath = $this->createSqliteDbFromSqlFile(__DIR__ . '/../testdata/simple_sqlite_db.sql');
+		$this->runCommand('viz:dot', "odbc:Driver=SQLITE3;Database=$dbFilePath", $dotFilePath);
+		$dotContents = file_get_contents($dotFilePath);
+
+		$this->checkDotFromSimpleDatabase($dotContents);
+	}
+
+	/** @test */
 	public function testMysqlVisualization()
 	{
+		$this->skipIfNoMysql();
+
 		$dotFilePath = $this->createTemporaryFile();
 		$this->createMysqlDbFromSqlFile(__DIR__ . '/../testdata/simple_mysql_db.sql');
 		$credentials = $this->getMysqlCredentials();

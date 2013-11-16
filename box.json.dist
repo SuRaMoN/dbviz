@@ -1,0 +1,33 @@
+ 
+{
+    "main": "bin/console",
+    "output": "package/dbviz.phar",
+	"directories": ["src", "bin"],
+	"files": [
+        "vendor/phpseclib/phpseclib/phpseclib/Crypt/Random.php",
+        "vendor/herrera-io/json/src/lib/json_version.php",
+        "vendor/herrera-io/phar-update/src/lib/constants.php"
+    ],
+	"finder": [
+        {
+            "name": "*.php",
+            "exclude": [
+				"herrera-io",
+				"justinrainbow",
+				"kherge",
+				"symfony/finder",
+				"symfony/process",
+				"symfony/yaml",
+				"phine",
+				"phpseclib",
+				"phpunit",
+				"seld",
+				"tests",
+				"Tests"
+			],
+            "in": "vendor"
+        }
+    ],
+    "stub": true
+}
+

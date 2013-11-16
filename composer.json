@@ -16,5 +16,9 @@
         "symfony/console": "2.3",
         "symfony/debug": "2.3",
 		"pimple/pimple": "v1.0"
-    }
+    },
+	"require-dev": {
+		"kherge/box": "~2",
+		"phpunit/phpunit": "~3"
+	}
 }

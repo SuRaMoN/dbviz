@@ -2,13 +2,13 @@
 
 set -e
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 VERSION="$1"
 
 if [[ -n $(git status -s) ]]; then
 	git status
-	echo "Working tree must be clean to perform this action" >$2
+	echo "Working tree must be clean to perform this action" >&2
 	exit 1
 fi
 
@@ -31,7 +31,6 @@ cat > manifest.json <<EOF
 		"version": "$VERSION"
 	}
 ]
-
 EOF
 
 git add manifest.json

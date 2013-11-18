@@ -14,8 +14,6 @@
         {
             "name": "*.php",
             "exclude": [
-				"herrera-io",
-				"justinrainbow",
 				"kherge",
 				"symfony/finder",
 				"symfony/process",
@@ -23,13 +21,17 @@
 				"phine",
 				"phpseclib",
 				"phpunit",
-				"seld",
 				"tests",
 				"Tests"
 			],
             "in": "vendor"
-        }
+        },
+		{
+            "name": "*.json",
+            "in": "vendor"
+		}
     ],
-    "stub": true
+    "stub": true,
+	"git-version": "dbviz_package_version"
 }
 

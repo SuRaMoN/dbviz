@@ -49,6 +49,7 @@ class DbVizContainer extends Pimple
 			$commands->append($c['command.dot_visualization']);
 			$commands->append(new \DbViz\Ui\SetEnvironmentCommand());
 			$commands->append(new \DbViz\Ui\EchoCommand());
+			$commands->append(new \DbViz\Ui\UpdateCommand());
 			return $commands;
 		});
 	}

@@ -13,7 +13,7 @@ class DbVizConsole extends Application
 {
 	public function __construct(Traversable $commands)
 	{
-		parent::__construct('DbViz', '1.0');
+		parent::__construct('DbViz', '@dbviz_package_version@');
 
 		foreach($commands as $command) {
 			$this->add($command);
@@ -23,7 +23,7 @@ class DbVizConsole extends Application
 	public function guiAwareRun(Input $input)
 	{
 		$application = $this;
-		if(null === $input->getFirstArgument()) {
+		if(strlen($input) == 0) {
 			$application = new Shell($application);
 		}
 		$application->run();

@@ -25,7 +25,7 @@ HASH="$(sha1sum package/dbviz.phar | grep -o '^[^ ]*')"
 cat > manifest.json <<EOF
 [
 	{
-	"name": "cliph.phar",
+	"name": "dbviz.phar",
 		"sha1": "$HASH",
 		"url": "https://raw.github.com/SuRaMoN/dbviz/releases/dbviz-${VERSION}.phar",
 		"version": "$VERSION"

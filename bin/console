@@ -9,5 +9,5 @@ use Symfony\Component\Debug\ErrorHandler;
 require(__DIR__ . '/../vendor/autoload.php');
 
 ErrorHandler::register();
-DbVizConsole::newInstance(new DbVizContainer())->guiAwareRun(new ArgvInput());
+DbVizConsole::newInstance(DbVizContainer::newInstance()->offsetGet('commands'))->guiAwareRun(new ArgvInput());
 

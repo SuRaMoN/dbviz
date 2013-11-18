@@ -2,6 +2,7 @@
 
 namespace DbViz\Ui;
 
+use Traversable;
 use DbViz\DbVizContainer;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\Input;
@@ -10,11 +11,11 @@ use Symfony\Component\Console\Shell;
 
 class DbVizConsole extends Application
 {
-	public function __construct(DbVizContainer $container)
+	public function __construct(Traversable $commands)
 	{
 		parent::__construct('DbViz', '1.0');
 
-		foreach($container['commands'] as $command) {
+		foreach($commands as $command) {
 			$this->add($command);
 		}
 	}
@@ -28,9 +29,9 @@ class DbVizConsole extends Application
 		$application->run();
 	}
 
-	public static function newInstance(DbVizContainer $container)
+	public static function newInstance(Traversable $commands)
 	{
-		return new self($container);
+		return new self($commands);
 	}
 }
  

@@ -2,7 +2,7 @@
 
 namespace DbViz\DbInfoExtractor;
 
-use DbViz\Constant\DbDrivers;
+use DbViz\Constant\DbDriver;
 use DbViz\DbInfoExtractor\TableSizeExtractor\InterbaseTableSizeExtractor;
 use DbViz\DbInfoExtractor\TableSizeExtractor\MssqlTableSizeExtractor;
 use DbViz\DbInfoExtractor\TableSizeExtractor\MysqlTableSizeExtractor;
@@ -16,19 +16,19 @@ class TableSizeExtractorFactory
 	{
 	}
 	
-	public function getForDriver($driver)
+	public function getForDriver(DbDriver $driver)
 	{
 		switch($driver) {
-			case DbDrivers::INTERBASE:
+			case DbDriver::INTERBASE():
 				return new InterbaseTableSizeExtractor();
 
-			case DbDrivers::MSSQL:
+			case DbDriver::MSSQL():
 				return new MssqlTableSizeExtractor();
 
-			case DbDrivers::MYSQL:
+			case DbDriver::MYSQL():
 				return new MysqlTableSizeExtractor();
 
-			case DbDrivers::SQLITE:
+			case DbDriver::SQLITE():
 				return new SqliteTableSizeExtractor();
 
 			default:

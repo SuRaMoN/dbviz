@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class EchoCommand extends DbVizCommand
+class EchoCommand extends EnvironmentAwareCommand
 {
     protected function configure()
 	{

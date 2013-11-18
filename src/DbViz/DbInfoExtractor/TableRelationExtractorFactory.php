@@ -2,7 +2,7 @@
 
 namespace DbViz\DbInfoExtractor;
 
-use DbViz\Constant\DbDrivers;
+use DbViz\Constant\DbDriver;
 use DbViz\DbInfoExtractor\TableRelationExtractor\InterbaseTableRelationExtractor;
 use DbViz\DbInfoExtractor\TableRelationExtractor\MssqlTableRelationExtractor;
 use DbViz\DbInfoExtractor\TableRelationExtractor\MysqlTableRelationExtractor;
@@ -16,19 +16,19 @@ class TableRelationExtractorFactory
 	{
 	}
 	
-	public function getForDriver($driver)
+	public function getForDriver(DbDriver $driver)
 	{
 		switch($driver) {
-			case DbDrivers::INTERBASE:
+			case DbDriver::INTERBASE():
 				return new InterbaseTableRelationExtractor();
 
-			case DbDrivers::MSSQL:
+			case DbDriver::MSSQL():
 				return new MssqlTableRelationExtractor();
 
-			case DbDrivers::MYSQL:
+			case DbDriver::MYSQL():
 				return new MysqlTableRelationExtractor();
 
-			case DbDrivers::SQLITE:
+			case DbDriver::SQLITE():
 				return new SqliteTableRelationExtractor();
 
 			default:

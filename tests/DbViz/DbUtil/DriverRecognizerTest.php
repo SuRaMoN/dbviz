@@ -3,7 +3,7 @@
 namespace DbViz\DbUtil;
 
 use DbViz\Entity\ConnectionCredentials;
-use DbViz\Constant\DbDrivers;
+use DbViz\Constant\DbDriver;
 use DbViz\DbVizTestCase;
 use DbViz\DbUtil\DriverRecognizer;
 
@@ -22,32 +22,32 @@ class DriverRecognizerTest extends DbVizTestCase
 	/** @test */
 	public function testMysqlRecognition()
 	{
-		$this->assertDriverIs(DbDrivers::MYSQL, 'mysql:bliablabloe');
+		$this->assertDriverIs(DbDriver::MYSQL(), 'mysql:bliablabloe');
 	}
 
 	/** @test */
 	public function testSqliteRecognition()
 	{
-		$this->assertDriverIs(DbDrivers::SQLITE, 'sqlite:bliablabloe');
+		$this->assertDriverIs(DbDriver::SQLITE(), 'sqlite:bliablabloe');
 	}
 
 	/** @test */
 	public function testUnixSqliteOdbcRecognition()
 	{
-		$this->assertDriverIs(DbDrivers::SQLITE, 'odbc:DRIVER=Sqlite3;Database=bliblabloe');
+		$this->assertDriverIs(DbDriver::SQLITE(), 'odbc:DRIVER=Sqlite3;Database=bliblabloe');
 	}
 
 	/** @test */
 	public function testWindowsSqliteOdbcRecognition()
 	{
-		$this->assertDriverIs(DbDrivers::SQLITE, 'odbc:DSN=SQLite3 Datasource;Database=full-path-to-db');
+		$this->assertDriverIs(DbDriver::SQLITE(), 'odbc:DSN=SQLite3 Datasource;Database=full-path-to-db');
 	}
 
 	protected function assertDriverIs($expectedDriver, $dsn)
 	{
 		$driverRecognizer = new DriverRecognizer();
 		$credentials = new ConnectionCredentials($dsn);
-		$this->assertEquals($expectedDriver, $driverRecognizer->getDriverName($credentials));
+		$this->assertEquals($expectedDriver, $driverRecognizer->getDriver($credentials));
 	}
 }
 

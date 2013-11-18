@@ -31,7 +31,7 @@ abstract class DbVizTestCase extends PHPUnit_Framework_TestCase
 
 	protected function createApplication()
 	{
-	    return new DbVizConsole($this->createContainer());
+	    return new DbVizConsole($this->createContainer()->offsetGet('commands'));
 	}
 
 	protected function runCommand($name)

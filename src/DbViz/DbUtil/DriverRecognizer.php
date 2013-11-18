@@ -2,7 +2,7 @@
 
 namespace DbViz\DbUtil;
 
-use DbViz\Constant\DbDrivers;
+use DbViz\Constant\DbDriver;
 use DbViz\Entity\ConnectionCredentials;
 use DbViz\Exception\UnknownDriverException;
 use PDO;
@@ -15,32 +15,32 @@ class DriverRecognizer
 	{
 	}
 
-	public function getDriverName(ConnectionCredentials $connectionCredentials)
+	public function getDriver(ConnectionCredentials $connectionCredentials)
 	{
 		$dsn = $connectionCredentials->getDsn();
 		switch(strtolower(preg_replace('/^([^:]*):.*/', '\1', $dsn))) {
 			case 'mysql':
-				return DbDrivers::MYSQL;
+				return DbDriver::MYSQL();
 
 			case 'odbc':
-				return $this->getOdbcDriverName($connectionCredentials);
+				return $this->getOdbcDriver($connectionCredentials);
 
 			case 'sqlite':
-				return DbDrivers::SQLITE;
+				return DbDriver::SQLITE();
 
 			default:
 				throw new UnknownDriverException("Could not recognize driver from dsn: $dsn");
 		}
 	}
 
-	protected function getOdbcDriverName(ConnectionCredentials $connectionCredentials)
+	protected function getOdbcDriver(ConnectionCredentials $connectionCredentials)
 	{
-		$driver = $this->getOdbcDriverNameFromDsn($connectionCredentials);
+		$driver = $this->getOdbcDriverFromDsn($connectionCredentials);
 		if(null !== $driver) {
 			return $driver;
 		}
 
-		$driver = $this->getOdbcDriverNameFromConnection($connectionCredentials);
+		$driver = $this->getOdbcDriverFromConnection($connectionCredentials);
 		if(null !== $driver) {
 			return $driver;
 		}
@@ -48,7 +48,7 @@ class DriverRecognizer
 		throw new UnknownDriverException('Could not retrieve odbc driver');
 	}
 
-	protected function getOdbcDriverNameFromDsn(ConnectionCredentials $connectionCredentials)
+	protected function getOdbcDriverFromDsn(ConnectionCredentials $connectionCredentials)
 	{
 		$dsn = substr($connectionCredentials->getDsn(), 5); // dsn should start with "odbc:"
 		$resultCount = preg_match('/(?:driver|dsn)\s*=([^;]*)/i', $dsn, $driverMatch);
@@ -58,14 +58,14 @@ class DriverRecognizer
 		switch(strtolower(trim($driverMatch[1]))) {
 			case 'sqlite3 datasource':
 			case 'sqlite3':
-				return DbDrivers::SQLITE;
+				return DbDriver::SQLITE();
 
 			default:
 				return null;
 		}
 	}
 	
-	protected function getOdbcDriverNameFromConnection(ConnectionCredentials $connectionCredentials)
+	protected function getOdbcDriverFromConnection(ConnectionCredentials $connectionCredentials)
 	{
 		try {
 			$pdo = new PDO($connectionCredentials->getDsn(), $connectionCredentials->getUsername(), $connectionCredentials->getPassword());
@@ -77,10 +77,10 @@ class DriverRecognizer
 		}
 		switch(true) {
 			case strpos($errorMessage, '[microsoft][odbc sql server driver]') !== false:
-				return DbDrivers::MSSQL;
+				return DbDriver::MSSQL();
 
 			case strpos($errorMessage, '[odbc interbase driver][interbase]') !== false:
-				return DbDrivers::INTERBASE;
+				return DbDriver::INTERBASE();
 
 			default:
 				return null;

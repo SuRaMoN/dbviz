@@ -1,10 +1,8 @@
-
 [
-    {
-        "name": "dbviz.phar",
-        "url": "https://raw.github.com/SuRaMoN/dbviz/master/dbviz-0.1.0.phar",
-		"sha1": "1718f4de85414eaf9be6fffde7e9691a10c84598",
-        "version": "0.1.0"
-    }
+	{
+	"name": "cliph.phar",
+		"sha1": "edf25c9303e4ca5bbe48a0d5ab8ef971726194ed",
+		"url": "https://raw.github.com/SuRaMoN/dbviz/releases/dbviz-0.3.0.phar",
+		"version": "0.3.0"
+	}
 ]
-

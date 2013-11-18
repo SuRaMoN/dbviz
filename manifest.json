@@ -3,6 +3,7 @@
     {
         "name": "dbviz.phar",
         "url": "https://raw.github.com/SuRaMoN/dbviz/master/dbviz-0.1.0.phar",
+		"sha1": "1718f4de85414eaf9be6fffde7e9691a10c84598",
         "version": "0.1.0"
     }
 ]

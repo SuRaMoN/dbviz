@@ -1,8 +1,9 @@
  
 {
     "main": "bin/console",
+	"chmod": "0755",
     "output": "package/dbviz.phar",
-	"directories": ["src", "bin"],
+	"directories": ["src"],
 	"files": [
         "vendor/phpseclib/phpseclib/phpseclib/Crypt/Random.php",
         "vendor/herrera-io/json/src/lib/json_version.php",

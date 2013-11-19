@@ -31,6 +31,7 @@ class DotVisualizationCommandTest extends DbVizTestCase
 	public function testOdbcSqliteVisualization()
 	{
 		$this->skipIfNoOdbcDriver();
+		$this->skipIfNoSqliteObcdDriver();
 
 		$dotFilePath = $this->createTemporaryFile();
 		$dbFilePath = $this->createSqliteDbFromSqlFile(__DIR__ . '/../testdata/simple_sqlite_db.sql');

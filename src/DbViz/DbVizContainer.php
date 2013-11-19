@@ -47,8 +47,9 @@ class DbVizContainer extends Pimple
 		$this['commands'] = $this->share(function($c) {
 			$commands = new ArrayObject();
 			$commands->append($c['command.dot_visualization']);
-			$commands->append(new \DbViz\Ui\SetEnvironmentCommand());
 			$commands->append(new \DbViz\Ui\EchoCommand());
+			$commands->append(new \DbViz\Ui\SetEnvironmentCommand());
+			$commands->append(new \DbViz\Ui\TestConnectionCommand());
 			$commands->append(new \DbViz\Ui\UpdateCommand());
 			return $commands;
 		});
@@ -58,6 +59,5 @@ class DbVizContainer extends Pimple
 	{
 	    return new self();
 	}
-	
 }
  

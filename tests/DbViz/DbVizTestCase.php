@@ -55,6 +55,17 @@ abstract class DbVizTestCase extends PHPUnit_Framework_TestCase
 		return $tmpFile;
 	}
 
+	protected function skipIfNoSqliteObcdDriver()
+	{
+		$config = $this->getConfig();
+		if(! array_key_exists('ODBC', $config) || ! array_key_exists('sqlite', $config['ODBC'])) {
+			return;
+		}
+		if(! filter_var($config['ODBC']['sqlite'],  FILTER_VALIDATE_BOOLEAN)) {
+			$this->markTestSkipped('Skipped because no sqlite odbc driver installed');
+		}
+	}
+
 	protected function skipIfNoOdbcDriver()
 	{
 		if(! in_array('odbc', PDO::getAvailableDrivers())) {

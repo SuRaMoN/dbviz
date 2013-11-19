@@ -1,4 +1,7 @@
 
+branches:
+  except:
+    - releases
 language: php
 php:
   - 5.3

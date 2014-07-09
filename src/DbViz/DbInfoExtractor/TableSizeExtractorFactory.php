@@ -6,6 +6,7 @@ use DbViz\Constant\DbDriver;
 use DbViz\DbInfoExtractor\TableSizeExtractor\InterbaseTableSizeExtractor;
 use DbViz\DbInfoExtractor\TableSizeExtractor\MssqlTableSizeExtractor;
 use DbViz\DbInfoExtractor\TableSizeExtractor\MysqlTableSizeExtractor;
+use DbViz\DbInfoExtractor\TableSizeExtractor\SqlbaseTableSizeExtractor;
 use DbViz\DbInfoExtractor\TableSizeExtractor\SqliteTableSizeExtractor;
 use Exception;
 
@@ -19,6 +20,9 @@ class TableSizeExtractorFactory
 	public function getForDriver(DbDriver $driver)
 	{
 		switch($driver) {
+			case DbDriver::SQLBASE():
+				return new SqlbaseTableSizeExtractor();
+
 			case DbDriver::INTERBASE():
 				return new InterbaseTableSizeExtractor();
 

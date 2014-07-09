@@ -6,6 +6,7 @@ use DbViz\Constant\DbDriver;
 use DbViz\DbInfoExtractor\TableRelationExtractor\InterbaseTableRelationExtractor;
 use DbViz\DbInfoExtractor\TableRelationExtractor\MssqlTableRelationExtractor;
 use DbViz\DbInfoExtractor\TableRelationExtractor\MysqlTableRelationExtractor;
+use DbViz\DbInfoExtractor\TableRelationExtractor\SqlbaseTableRelationExtractor;
 use DbViz\DbInfoExtractor\TableRelationExtractor\SqliteTableRelationExtractor;
 use Exception;
 
@@ -19,6 +20,9 @@ class TableRelationExtractorFactory
 	public function getForDriver(DbDriver $driver)
 	{
 		switch($driver) {
+			case DbDriver::SQLBASE():
+				return new SqlbaseTableRelationExtractor();
+
 			case DbDriver::INTERBASE():
 				return new InterbaseTableRelationExtractor();
 

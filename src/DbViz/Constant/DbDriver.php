@@ -27,6 +27,11 @@ class DbDriver
 		return $this->driver;
 	}
 
+	public static function SQLBASE()
+	{
+		return self::getInstance(__FUNCTION__);
+	}
+
 	public static function INTERBASE()
 	{
 		return self::getInstance(__FUNCTION__);

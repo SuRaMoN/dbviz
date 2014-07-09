@@ -79,6 +79,9 @@ class DriverRecognizer
 			case strpos($errorMessage, '[microsoft][odbc sql server driver]') !== false:
 				return DbDriver::MSSQL();
 
+			case strpos($errorMessage, '[odbc sqlbase driver][sqlbase]') !== false:
+				return DbDriver::SQLBASE();
+
 			case strpos($errorMessage, '[odbc interbase driver][interbase]') !== false:
 				return DbDriver::INTERBASE();
 

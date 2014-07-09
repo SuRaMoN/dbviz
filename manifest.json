@@ -1,8 +1,8 @@
 [
 	{
 	"name": "dbviz.phar",
-		"sha1": "5ded77af6c22b3533d71c27c334d03bc707a301d",
-		"url": "https://raw.github.com/SuRaMoN/dbviz/releases/dbviz-0.5.0.phar",
-		"version": "0.5.0"
+		"sha1": "f86f5f74d08d9dbba842b8972959d0a1739655bb",
+		"url": "https://raw.github.com/SuRaMoN/dbviz/releases/dbviz-0.6.0.phar",
+		"version": "0.6.0"
 	}
 ]

@@ -28,6 +28,9 @@ class DriverRecognizer
 			case 'sqlite':
 				return DbDriver::SQLITE();
 
+			case 'oci':
+				return DbDriver::ORACLE();
+
 			default:
 				throw new UnknownDriverException("Could not recognize driver from dsn: $dsn");
 		}

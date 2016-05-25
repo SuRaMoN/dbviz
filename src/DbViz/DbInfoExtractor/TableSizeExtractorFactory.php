@@ -8,6 +8,7 @@ use DbViz\DbInfoExtractor\TableSizeExtractor\MssqlTableSizeExtractor;
 use DbViz\DbInfoExtractor\TableSizeExtractor\MysqlTableSizeExtractor;
 use DbViz\DbInfoExtractor\TableSizeExtractor\SqlbaseTableSizeExtractor;
 use DbViz\DbInfoExtractor\TableSizeExtractor\SqliteTableSizeExtractor;
+use DbViz\DbInfoExtractor\TableSizeExtractor\OracleTableSizeExtractor;
 use Exception;
 
 
@@ -34,6 +35,9 @@ class TableSizeExtractorFactory
 
 			case DbDriver::SQLITE():
 				return new SqliteTableSizeExtractor();
+
+			case DbDriver::ORACLE():
+				return new OracleTableSizeExtractor();
 
 			default:
 				throw new Exception("Unknown driver: $driver");

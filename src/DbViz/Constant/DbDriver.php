@@ -47,6 +47,11 @@ class DbDriver
 		return self::getInstance(__FUNCTION__);
 	}
 
+	public static function ORACLE()
+	{
+		return self::getInstance(__FUNCTION__);
+	}
+
 	public static function SQLITE()
 	{
 		return self::getInstance(__FUNCTION__);
